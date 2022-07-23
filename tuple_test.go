@@ -1,6 +1,7 @@
 package main
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -59,6 +60,50 @@ func Test_tuple_isVector(t *testing.T) {
 			}
 			if got := tr.isVector(); got != tt.want {
 				t.Errorf("tuple.isVector() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_point(t *testing.T) {
+	type args struct {
+		x float64
+		y float64
+		z float64
+	}
+	tests := []struct {
+		name string
+		args args
+		want tuple
+	}{
+		{"new point", args{4, -4, 3}, tuple{4, -4, 3, 1}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := point(tt.args.x, tt.args.y, tt.args.z); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("point() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func Test_vector(t *testing.T) {
+	type args struct {
+		x float64
+		y float64
+		z float64
+	}
+	tests := []struct {
+		name string
+		args args
+		want tuple
+	}{
+		{"new vector", args{4, -4, 3}, tuple{4, -4, 3, 0}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := vector(tt.args.x, tt.args.y, tt.args.z); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("vector() = %v, want %v", got, tt.want)
 			}
 		})
 	}

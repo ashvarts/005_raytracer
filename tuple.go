@@ -19,3 +19,11 @@ func (t tuple) isVector() bool {
 		return false
 	}
 }
+
+func point(x, y, z float64) tuple {
+	return tuple{x, y, z, 1.0}
+}
+
+func vector(x, y, z float64) tuple {
+	return tuple{x, y, z, 0.0}
+}
