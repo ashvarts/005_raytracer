@@ -119,3 +119,34 @@ func TestTupleAdd(t *testing.T) {
 		t.Errorf("expected: %v, got: %v", sum, want)
 	}
 }
+
+func TestTupleSub(t *testing.T) {
+	p1 := Point(3, 2, 1)
+	p2 := Point(5, 6, 7)
+
+	sum := p1.Sub(p2)
+	want := Vector(-2, -4, -6)
+	if sum != want {
+		t.Errorf("expected: %v, got: %v", sum, want)
+	}
+}
+
+func TestTuple_Sub(t *testing.T) {
+	tests := []struct {
+		name string
+		t1   Tuple
+		t2   Tuple
+		want Tuple
+	}{
+		{"Subtract two point", Point(3, 2, 1), Point(5, 6, 7), Vector(-2, -4, -6)},
+		{"Subtract a vector from point", Point(3, 2, 1), Vector(5, 6, 7), Point(-2, -4, -6)},
+		{"Subtract two vectors", Vector(3, 2, 1), Vector(5, 6, 7), Vector(-2, -4, -6)},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.t1.Sub(tt.t2); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Tuple.Sub() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}

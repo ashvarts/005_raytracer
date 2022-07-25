@@ -29,6 +29,15 @@ func (t Tuple) Add(tt Tuple) Tuple {
 	}
 }
 
+func (t Tuple) Sub(tt Tuple) Tuple {
+	return Tuple{
+		t.x - tt.x,
+		t.y - tt.y,
+		t.z - tt.z,
+		t.w - tt.w,
+	}
+}
+
 func Point(x, y, z float64) Tuple {
 	return Tuple{x, y, z, 1.0}
 }
