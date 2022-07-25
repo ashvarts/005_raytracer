@@ -28,7 +28,7 @@ func Test_Tuple_isPoint(t *testing.T) {
 				z: tt.fields.z,
 				w: tt.fields.w,
 			}
-			if got := tr.isPoint(); got != tt.want {
+			if got := tr.IsPoint(); got != tt.want {
 				t.Errorf("Tuple.isPoint() = %v, want %v", got, tt.want)
 			}
 		})
@@ -58,7 +58,7 @@ func Test_Tuple_isVector(t *testing.T) {
 				z: tt.fields.z,
 				w: tt.fields.w,
 			}
-			if got := tr.isVector(); got != tt.want {
+			if got := tr.IsVector(); got != tt.want {
 				t.Errorf("Tuple.isVector() = %v, want %v", got, tt.want)
 			}
 		})
@@ -80,7 +80,7 @@ func Test_point(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := point(tt.args.x, tt.args.y, tt.args.z); !reflect.DeepEqual(got, tt.want) {
+			if got := Point(tt.args.x, tt.args.y, tt.args.z); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("point() = %v, want %v", got, tt.want)
 			}
 		})
@@ -102,9 +102,20 @@ func Test_vector(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := vector(tt.args.x, tt.args.y, tt.args.z); !reflect.DeepEqual(got, tt.want) {
+			if got := Vector(tt.args.x, tt.args.y, tt.args.z); !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("vector() = %v, want %v", got, tt.want)
 			}
 		})
+	}
+}
+
+func TestTupleAdd(t *testing.T) {
+	t1 := Point(3, -2, 5)
+	t2 := Vector(-2, 3, 1)
+
+	sum := t1.Add(t2)
+	want := Tuple{1, 1, 6, 1}
+	if sum != want {
+		t.Errorf("expected: %v, got: %v", sum, want)
 	}
 }

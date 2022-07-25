@@ -4,7 +4,7 @@ type Tuple struct {
 	x, y, z, w float64
 }
 
-func (t Tuple) isPoint() bool {
+func (t Tuple) IsPoint() bool {
 	if int(t.w) == 1 {
 		return true
 	} else {
@@ -12,7 +12,7 @@ func (t Tuple) isPoint() bool {
 	}
 }
 
-func (t Tuple) isVector() bool {
+func (t Tuple) IsVector() bool {
 	if int(t.w) == 0 {
 		return true
 	} else {
@@ -20,10 +20,19 @@ func (t Tuple) isVector() bool {
 	}
 }
 
-func point(x, y, z float64) Tuple {
+func (t Tuple) Add(tt Tuple) Tuple {
+	return Tuple{
+		t.x + tt.x,
+		t.y + tt.y,
+		t.z + tt.z,
+		t.w + tt.w,
+	}
+}
+
+func Point(x, y, z float64) Tuple {
 	return Tuple{x, y, z, 1.0}
 }
 
-func vector(x, y, z float64) Tuple {
+func Vector(x, y, z float64) Tuple {
 	return Tuple{x, y, z, 0.0}
 }
