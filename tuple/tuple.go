@@ -34,10 +34,18 @@ func (t Tuple) Sub(tt Tuple) Tuple {
 		t.x - tt.x,
 		t.y - tt.y,
 		t.z - tt.z,
-		t.w - tt.w,
+		t.w + tt.w,
 	}
 }
 
+func (t Tuple) Negate() Tuple {
+	return Tuple{
+		-1 * t.x,
+		-1 * t.y,
+		-1 * t.z,
+		-1 * t.w,
+	}
+}
 func Point(x, y, z float64) Tuple {
 	return Tuple{x, y, z, 1.0}
 }

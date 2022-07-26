@@ -141,6 +141,7 @@ func TestTuple_Sub(t *testing.T) {
 		{"Subtract two point", Point(3, 2, 1), Point(5, 6, 7), Vector(-2, -4, -6)},
 		{"Subtract a vector from point", Point(3, 2, 1), Vector(5, 6, 7), Point(-2, -4, -6)},
 		{"Subtract two vectors", Vector(3, 2, 1), Vector(5, 6, 7), Vector(-2, -4, -6)},
+		{"Subtract two vectors", Vector(0, 0, 0), Vector(1, -2, 3), Vector(-1, 2, -3)},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -148,5 +149,15 @@ func TestTuple_Sub(t *testing.T) {
 				t.Errorf("Tuple.Sub() = %v, want %v", got, tt.want)
 			}
 		})
+	}
+}
+
+func TestTupleNegate(t *testing.T) {
+	tup := Tuple{1, -2, 3, -4}
+	got := tup.Negate()
+	want := Tuple{-1, 2, -3, 4}
+
+	if got != want {
+		t.Errorf("got: %v, want: %v", got, want)
 	}
 }
