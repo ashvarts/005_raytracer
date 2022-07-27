@@ -152,6 +152,24 @@ func TestTuple_Sub(t *testing.T) {
 	}
 }
 
+func TestTupleMultiply(t *testing.T) {
+	tests := []struct {
+		name string
+		t1   Tuple
+		s    float64
+		want Tuple
+	}{
+		{"Multiply a tuple by a scalar", Tuple{1, -2, 3, -4}, 3.5, Tuple{3.5, -7, 10.5, -14}},
+		{"Multiply a tuple by a fraction", Tuple{1, -2, 3, -4}, 0.5, Tuple{0.5, -1, 1.5, -2}},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.t1.Multiply(tt.s); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("Tuple.Multiply() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
 func TestTupleNegate(t *testing.T) {
 	tup := Tuple{1, -2, 3, -4}
 	got := tup.Negate()

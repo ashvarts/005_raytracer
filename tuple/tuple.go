@@ -46,6 +46,18 @@ func (t Tuple) Negate() Tuple {
 		-1 * t.w,
 	}
 }
+
+// Multiply scales a vector by a scalar
+func (t Tuple) Multiply(s float64) Tuple {
+
+	return Tuple{
+		t.x * s,
+		t.y * s,
+		t.z * s,
+		t.w * s,
+	}
+}
+
 func Point(x, y, z float64) Tuple {
 	return Tuple{x, y, z, 1.0}
 }
