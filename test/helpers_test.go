@@ -20,8 +20,8 @@ func TestAssertAlmostEquall(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := AssertAlmostEquall(tt.args.a, tt.args.b); got != tt.want {
-				t.Errorf("AssertAlmostEquall() = %v, want %v", got, tt.want)
+			if got := aproxEquall(tt.args.a, tt.args.b); got != tt.want {
+				t.Errorf("aproxEquall() = %v, want %v", got, tt.want)
 			}
 		})
 	}

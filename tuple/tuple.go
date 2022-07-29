@@ -3,11 +3,11 @@ package tuple
 import "math"
 
 type Tuple struct {
-	x, y, z, w float64
+	X, Y, Z, W float64
 }
 
 func (t Tuple) IsPoint() bool {
-	if int(t.w) == 1 {
+	if int(t.W) == 1 {
 		return true
 	} else {
 		return false
@@ -15,7 +15,7 @@ func (t Tuple) IsPoint() bool {
 }
 
 func (t Tuple) IsVector() bool {
-	if int(t.w) == 0 {
+	if int(t.W) == 0 {
 		return true
 	} else {
 		return false
@@ -24,28 +24,28 @@ func (t Tuple) IsVector() bool {
 
 func (t Tuple) Add(tt Tuple) Tuple {
 	return Tuple{
-		t.x + tt.x,
-		t.y + tt.y,
-		t.z + tt.z,
-		t.w + tt.w,
+		t.X + tt.X,
+		t.Y + tt.Y,
+		t.Z + tt.Z,
+		t.W + tt.W,
 	}
 }
 
 func (t Tuple) Sub(tt Tuple) Tuple {
 	return Tuple{
-		t.x - tt.x,
-		t.y - tt.y,
-		t.z - tt.z,
-		t.w + tt.w,
+		t.X - tt.X,
+		t.Y - tt.Y,
+		t.Z - tt.Z,
+		t.W + tt.W,
 	}
 }
 
 func (t Tuple) Negate() Tuple {
 	return Tuple{
-		-1 * t.x,
-		-1 * t.y,
-		-1 * t.z,
-		-1 * t.w,
+		-1 * t.X,
+		-1 * t.Y,
+		-1 * t.Z,
+		-1 * t.W,
 	}
 }
 
@@ -53,17 +53,28 @@ func (t Tuple) Negate() Tuple {
 func (t Tuple) Multiply(s float64) Tuple {
 
 	return Tuple{
-		t.x * s,
-		t.y * s,
-		t.z * s,
-		t.w * s,
+		t.X * s,
+		t.Y * s,
+		t.Z * s,
+		t.W * s,
 	}
 }
 
 // Magnitude return the magnitude of a vector
 func (t Tuple) Magnitude() float64 {
-	sumOfSquares := math.Pow(t.x, 2) + math.Pow(t.y, 2) + math.Pow(t.z, 2) + math.Pow(t.w, 2)
+	sumOfSquares := math.Pow(t.X, 2) + math.Pow(t.Y, 2) + math.Pow(t.Z, 2) + math.Pow(t.W, 2)
 	return math.Sqrt(sumOfSquares)
+}
+
+// Normalize returns the normalized for of a vector
+func (t Tuple) Normalize() Tuple {
+	magnitude := t.Magnitude()
+	return Tuple{
+		t.X / magnitude,
+		t.Y / magnitude,
+		t.Z / magnitude,
+		t.W / magnitude,
+	}
 }
 
 func Point(x, y, z float64) Tuple {

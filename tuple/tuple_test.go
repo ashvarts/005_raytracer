@@ -4,6 +4,8 @@ import (
 	"math"
 	"reflect"
 	"testing"
+
+	"github.com/ashvarts/raytracer/test"
 )
 
 func Test_Tuple_isPoint(t *testing.T) {
@@ -24,10 +26,10 @@ func Test_Tuple_isPoint(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			tr := Tuple{
-				x: tt.fields.x,
-				y: tt.fields.y,
-				z: tt.fields.z,
-				w: tt.fields.w,
+				X: tt.fields.x,
+				Y: tt.fields.y,
+				Z: tt.fields.z,
+				W: tt.fields.w,
 			}
 			if got := tr.IsPoint(); got != tt.want {
 				t.Errorf("Tuple.isPoint() = %v, want %v", got, tt.want)
@@ -54,10 +56,10 @@ func Test_Tuple_isVector(t *testing.T) {
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			tr := Tuple{
-				x: tt.fields.x,
-				y: tt.fields.y,
-				z: tt.fields.z,
-				w: tt.fields.w,
+				X: tt.fields.x,
+				Y: tt.fields.y,
+				Z: tt.fields.z,
+				W: tt.fields.w,
 			}
 			if got := tr.IsVector(); got != tt.want {
 				t.Errorf("Tuple.isVector() = %v, want %v", got, tt.want)
@@ -191,6 +193,23 @@ func TestTupleMagnitude(t *testing.T) {
 		})
 	}
 }
+func TestTupleNormalize(t *testing.T) {
+	tests := []struct {
+		name string
+		t1   Tuple
+		want Tuple
+	}{
+		{"Compute vector normal", Vector(4, 0, 0), Vector(1, 0, 0)},
+		{"Compute vector normal", Vector(1, 2, 3), Vector(0.26726, 0.53452, 0.80178)},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.t1.Normalize(); !AssertTupleEqual(got, tt.want) {
+				t.Errorf("Tuple.Normalize() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
 func TestTupleNegate(t *testing.T) {
 	tup := Tuple{1, -2, 3, -4}
 	got := tup.Negate()
@@ -199,4 +218,12 @@ func TestTupleNegate(t *testing.T) {
 	if got != want {
 		t.Errorf("got: %v, want: %v", got, want)
 	}
+}
+
+// AssertTupleEqual is a helper function that tests if two tuples are equial using an aproximate equilancy for each element
+func AssertTupleEqual(t1 Tuple, t2 Tuple) bool {
+	if test.AproxEquall(t1.X, t2.X) && test.AproxEquall(t1.Y, t2.Y) && test.AproxEquall(t1.Z, t2.Z) && test.AproxEquall(t1.W, t2.W) {
+		return true
+	}
+	return false
 }
