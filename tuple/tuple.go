@@ -36,7 +36,7 @@ func (t Tuple) Sub(tt Tuple) Tuple {
 		t.X - tt.X,
 		t.Y - tt.Y,
 		t.Z - tt.Z,
-		t.W + tt.W,
+		t.W - tt.W,
 	}
 }
 

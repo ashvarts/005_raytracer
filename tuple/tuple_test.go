@@ -141,7 +141,7 @@ func TestTuple_Sub(t *testing.T) {
 		t2   Tuple
 		want Tuple
 	}{
-		{"Subtract two point", Point(3, 2, 1), Point(5, 6, 7), Vector(-2, -4, -6)},
+		{"Subtract two points", Point(3, 2, 1), Point(5, 6, 7), Vector(-2, -4, -6)},
 		{"Subtract a vector from point", Point(3, 2, 1), Vector(5, 6, 7), Point(-2, -4, -6)},
 		{"Subtract two vectors", Vector(3, 2, 1), Vector(5, 6, 7), Vector(-2, -4, -6)},
 		{"Subtract two vectors", Vector(0, 0, 0), Vector(1, -2, 3), Vector(-1, 2, -3)},
