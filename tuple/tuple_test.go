@@ -1,6 +1,7 @@
 package tuple
 
 import (
+	"math"
 	"reflect"
 	"testing"
 )
@@ -176,7 +177,11 @@ func TestTupleMagnitude(t *testing.T) {
 		t1   Tuple
 		want float64
 	}{
+		{"Compute magnitude", Vector(1, 0, 0), 1},
 		{"Compute magnitude", Vector(0, 1, 0), 1},
+		{"Compute magnitude", Vector(0, 0, 1), 1},
+		{"Compute magnitude", Vector(1, 2, 3), math.Sqrt(14)},
+		{"Compute magnitude", Vector(-1, -2, -3), math.Sqrt(14)},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
