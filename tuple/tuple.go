@@ -1,5 +1,7 @@
 package tuple
 
+import "math"
+
 type Tuple struct {
 	x, y, z, w float64
 }
@@ -56,6 +58,12 @@ func (t Tuple) Multiply(s float64) Tuple {
 		t.z * s,
 		t.w * s,
 	}
+}
+
+// Magnitude return the magnitude of a vector
+func (t Tuple) Magnitude() float64 {
+	sumOfSquares := math.Pow(t.x, 2) + math.Pow(t.y, 2) + math.Pow(t.z, 2) + math.Pow(t.w, 2)
+	return math.Sqrt(sumOfSquares)
 }
 
 func Point(x, y, z float64) Tuple {

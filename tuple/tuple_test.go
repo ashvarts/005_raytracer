@@ -170,6 +170,22 @@ func TestTupleMultiply(t *testing.T) {
 		})
 	}
 }
+func TestTupleMagnitude(t *testing.T) {
+	tests := []struct {
+		name string
+		t1   Tuple
+		want float64
+	}{
+		{"Compute magnitude", Vector(0, 1, 0), 1},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := tt.t1.Magnitude(); got != tt.want {
+				t.Errorf("Tuple.Magnitude() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
 func TestTupleNegate(t *testing.T) {
 	tup := Tuple{1, -2, 3, -4}
 	got := tup.Negate()
