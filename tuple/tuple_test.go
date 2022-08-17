@@ -134,6 +134,17 @@ func TestTupleSub(t *testing.T) {
 	}
 }
 
+func TestDot(t *testing.T) {
+	v1 := Vector(1, 2, 3)
+	v2 := Vector(2, 3, 4)
+
+	dotProd := v1.Dot(v2)
+	want := 20.0
+	if dotProd != want {
+		t.Errorf("want: %v, got: %v", want, dotProd)
+	}
+}
+
 func TestTuple_Sub(t *testing.T) {
 	tests := []struct {
 		name string

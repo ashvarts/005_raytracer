@@ -77,6 +77,11 @@ func (t Tuple) Normalize() Tuple {
 	}
 }
 
+// Dot takes a vector and returns the dot product.
+func (t Tuple) Dot(v Tuple) float64 {
+	return t.X*v.X + t.Y*v.Y + t.Z*v.Z + t.W + v.W
+}
+
 func Point(x, y, z float64) Tuple {
 	return Tuple{x, y, z, 1.0}
 }
