@@ -82,6 +82,14 @@ func (t Tuple) Dot(v Tuple) float64 {
 	return t.X*v.X + t.Y*v.Y + t.Z*v.Z + t.W + v.W
 }
 
+// Cross returns the cross product of two vectors.
+func (t Tuple) Cross(v Tuple) Tuple {
+	return Vector(t.Y*v.Z-t.Z*v.Y,
+		t.Z*v.X-t.X*v.Z,
+		t.X*v.Y-t.Y*v.X,
+	)
+}
+
 func Point(x, y, z float64) Tuple {
 	return Tuple{x, y, z, 1.0}
 }

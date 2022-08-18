@@ -144,7 +144,22 @@ func TestDot(t *testing.T) {
 		t.Errorf("want: %v, got: %v", want, dotProd)
 	}
 }
+func TestCross(t *testing.T) {
+	v1 := Vector(1, 2, 3)
+	v2 := Vector(2, 3, 4)
 
+	dotProd := v1.Cross(v2)
+	want := Vector(-1, 2, -1)
+	if dotProd != want {
+		t.Errorf("want: %v, got: %v", want, dotProd)
+	}
+	dotProd = v2.Cross(v1)
+	want = Vector(1, -2, 1)
+	if dotProd != want {
+		t.Errorf("want: %v, got: %v", want, dotProd)
+	}
+
+}
 func TestTuple_Sub(t *testing.T) {
 	tests := []struct {
 		name string
