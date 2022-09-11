@@ -9,3 +9,11 @@ type Color struct {
 func NewColor(r, g, b float64) Color {
 	return Color{r, g, b}
 }
+
+func (c Color) Add(co Color) Color {
+	return Color{
+		c.red + co.red,
+		c.green + co.green,
+		c.blue + co.blue,
+	}
+}
