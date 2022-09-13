@@ -17,3 +17,11 @@ func (c Color) Add(co Color) Color {
 		c.blue + co.blue,
 	}
 }
+
+func (c Color) Sub(co Color) Color {
+	return Color{
+		c.red - co.red,
+		c.green - co.green,
+		c.blue - co.blue,
+	}
+}
