@@ -1,9 +1,9 @@
 package color
 
 type Color struct {
-	red   float64
-	green float64
-	blue  float64
+	Red   float64
+	Green float64
+	Blue  float64
 }
 
 func NewColor(r, g, b float64) Color {
@@ -12,16 +12,16 @@ func NewColor(r, g, b float64) Color {
 
 func (c Color) Add(co Color) Color {
 	return Color{
-		c.red + co.red,
-		c.green + co.green,
-		c.blue + co.blue,
+		c.Red + co.Red,
+		c.Green + co.Green,
+		c.Blue + co.Blue,
 	}
 }
 
 func (c Color) Sub(co Color) Color {
 	return Color{
-		c.red - co.red,
-		c.green - co.green,
-		c.blue - co.blue,
+		c.Red - co.Red,
+		c.Green - co.Green,
+		c.Blue - co.Blue,
 	}
 }
