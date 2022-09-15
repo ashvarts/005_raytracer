@@ -31,3 +31,21 @@ func TestColorSub(t *testing.T) {
 		t.Errorf("wanted:%v, got:%v", want, got)
 	}
 }
+
+func TestColorScalarMulti(t *testing.T) {
+	c1 := color.NewColor(0.2, 0.3, 0.4)
+	scalar := 2.0
+	want := color.NewColor(0.4, 0.6, 0.8)
+	if got := c1.ScalarMulti(scalar); got != want {
+		t.Errorf("wanted:%v, got:%v", want, got)
+	}
+}
+
+func TestColorMulti(t *testing.T) {
+	c1 := color.NewColor(1.0, 0.2, 0.4)
+	c2 := color.NewColor(0.9, 1, 0.1)
+	want := color.NewColor(0.9, 0.2, 0.04)
+	if got := c1.Multi(c2); !test.AproxEquall(got, want) {
+		t.Errorf("wanted:%v, got:%v", want, got)
+	}
+}

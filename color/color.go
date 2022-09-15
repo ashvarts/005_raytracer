@@ -25,3 +25,19 @@ func (c Color) Sub(co Color) Color {
 		c.Blue - co.Blue,
 	}
 }
+
+func (c Color) ScalarMulti(n float64) Color {
+	return Color{
+		c.Red * n,
+		c.Green * n,
+		c.Blue * n,
+	}
+}
+
+func (c Color) Multi(co Color) Color {
+	return Color{
+		c.Red * co.Red,
+		c.Green * co.Green,
+		c.Blue * co.Blue,
+	}
+}
