@@ -10,22 +10,19 @@ type Pixel map[Coordinates]color.Color
 
 type Canvas struct {
 	Width, Height int
-	Pixels        []Pixel
+	Pixels        Pixel
 }
 
 func NewCanvas(w, h int) Canvas {
 	canvas := Canvas{
 		Width:  w,
 		Height: h,
-		Pixels: make([]Pixel, 0),
+		Pixels: make(Pixel, w*h),
 	}
 
 	for x := 0; x < w; x++ {
 		for y := 0; y < h; y++ {
-			p := Pixel{
-				Coordinates{x, y}: color.NewColor(0, 0, 0),
-			}
-			canvas.Pixels = append(canvas.Pixels, p)
+			canvas.Pixels[Coordinates{x, y}] =  color.NewColor(0, 0, 0)
 		}
 	}
 	return canvas
