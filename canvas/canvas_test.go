@@ -23,3 +23,15 @@ func TestNewCanvas(t *testing.T) {
 		}
 	}
 }
+
+func TestWritingPixelToCanvas(t *testing.T) {
+	c := canvas.NewCanvas(10, 20)
+	red := color.NewColor(1, 0, 0)
+
+	c.WritePixel(2, 3, red)
+	gott := c.PixelAt(2, 3)
+	_ = gott
+	if got := c.PixelAt(2, 3); got != red {
+		t.Errorf("Expected pixel to be %v, got:%v", red, got)
+	}
+}
