@@ -1,6 +1,11 @@
 package canvas
 
-import "github.com/ashvarts/raytracer/color"
+import (
+	"fmt"
+	"io"
+
+	"github.com/ashvarts/raytracer/color"
+)
 
 type Coordinates struct {
 	X, Y int
@@ -36,4 +41,12 @@ func (c Canvas) WritePixel(x int, y int, col color.Color) {
 func (c Canvas) PixelAt(x, y int) color.Color {
 	cordonates := Coordinates{x, y}
 	return c.Pixels[cordonates]
+}
+
+func (c Canvas) WritePPMHeader(w io.Writer) error {
+	_, err := fmt.Fprintf(w, "P3\n%d %d\n255", c.Width, c.Height)
+	if err != nil {
+		return err
+	}
+	return nil
 }

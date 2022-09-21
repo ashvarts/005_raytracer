@@ -1,6 +1,7 @@
 package canvas_test
 
 import (
+	"bytes"
 	"testing"
 
 	"github.com/ashvarts/raytracer/canvas"
@@ -33,5 +34,21 @@ func TestWritingPixelToCanvas(t *testing.T) {
 	_ = gott
 	if got := c.PixelAt(2, 3); got != red {
 		t.Errorf("Expected pixel to be %v, got:%v", red, got)
+	}
+}
+
+func TestCanvasToPPM(t *testing.T) {
+	buf := bytes.Buffer{}
+	c := canvas.NewCanvas(5, 3)
+	err := c.WritePPMHeader(&buf)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := buf.String()
+	want := `P3
+5 3
+255`
+	if got != want {
+		t.Errorf("got '%s' want '%s'", got, want)
 	}
 }
