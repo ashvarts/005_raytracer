@@ -52,3 +52,22 @@ func TestCanvasToPPM(t *testing.T) {
 		t.Errorf("got '%s' want '%s'", got, want)
 	}
 }
+
+func TestCanvasBodyToPPM(t *testing.T) {
+	buf := bytes.Buffer{}
+	c := canvas.NewCanvas(5, 3)
+	c.WritePixel(0, 0, color.NewColor(1.5, 0, 0))
+	c.WritePixel(2, 1, color.NewColor(0, 0.5, 0))
+	c.WritePixel(4, 2, color.NewColor(-0.5, 0, 1))
+	err := c.WritePPMBody(&buf)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got := buf.String()
+	want := `255 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 128 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 255`
+	if got != want {
+		t.Errorf("got '%s' want '%s'", got, want)
+	}
+}
