@@ -1,6 +1,7 @@
 package canvas
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 
@@ -51,10 +52,7 @@ func (c Canvas) WritePPMHeader(w io.Writer) error {
 	return nil
 }
 
-func (c Canvas) WritePPMBody(w io.Writer) error {
-	_, err := fmt.Fprintf(w, "P3\n%d %d\n255", c.Width, c.Height)
-	if err != nil {
-		return err
-	}
+func (c Canvas) WritePPMBody(buf *bytes.Buffer) error {
+	buf.WriteString(c.PixelAt(0, 0).String())
 	return nil
 }
