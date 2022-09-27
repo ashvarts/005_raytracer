@@ -2,6 +2,7 @@ package color
 
 import (
 	"fmt"
+	"math"
 )
 
 type Color struct {
@@ -55,11 +56,11 @@ func (c Color) String() string {
 }
 
 func normalized(c float64) int {
-	n := int(c * 255)
+	n := math.Round(c * 255)
 	if n < 0 {
 		return 0
 	} else if n > 255 {
 		return 255
 	}
-	return n
+	return int(n)
 }

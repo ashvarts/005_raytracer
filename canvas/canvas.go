@@ -53,9 +53,13 @@ func (c Canvas) WritePPMHeader(w io.Writer) error {
 }
 
 func (c Canvas) WritePPMBody(buf *bytes.Buffer) error {
-	for row := 0; row <= c.Height; row++ {
-		buf.WriteString(c.PixelAt(row, 0).String())
-		buf.WriteString(" ")
+	for row := 0; row < c.Height; row++ {
+		for col := 0; col < c.Width; col++ {
+			buf.WriteString(c.PixelAt(row, col).String())
+			if col != c.Width-1 {
+				buf.WriteString(" ")
+			}
+		}
 	}
 	return nil
 }
