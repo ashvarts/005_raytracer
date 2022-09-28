@@ -101,4 +101,26 @@ func TestCanvasBodyToPPM(t *testing.T) {
 			t.Errorf("got '%s' want '%s'", got, want)
 		}
 	})
+
+	t.Run("no line over 70 chars long", func(t *testing.T) {
+		buf := bytes.Buffer{}
+		c := canvas.NewCanvas(10, 2)
+
+		// set every pixel to almost white
+		for pixel := range c.Pixels {
+			c.WritePixel(pixel.X, pixel.Y, color.NewColor(1, 0.8, 0.6))
+		}
+		err := c.WritePPMBody(&buf)
+		if err != nil {
+			t.Fatal(err)
+		}
+		got := buf.String()
+		want := `255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
+153 255 204 153 255 204 153 255 204 153 255 204 153
+255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204
+153 255 204 153 255 204 153 255 204 153 255 204 153`
+		if got != want {
+			t.Errorf("got '%s' want '%s'", got, want)
+		}
+	})
 }

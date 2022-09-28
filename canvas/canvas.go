@@ -58,11 +58,22 @@ func (c Canvas) WritePPMBody(buf *bytes.Buffer) error {
 			buf.WriteString("\n")
 		}
 		for col := 0; col < c.Width; col++ {
+			if col != 0 && col%5 == 0 {
+				buf.WriteString("\n")
+			}
 			buf.WriteString(c.PixelAt(col, row).String())
 			if col != c.Width-1 {
 				buf.WriteString(" ")
 			}
 		}
+	}
+	return nil
+}
+
+func (c Canvas) WritePPMFooter(w io.Writer) error {
+	_, err := fmt.Print("\n")
+	if err != nil {
+		return err
 	}
 	return nil
 }
