@@ -3,7 +3,6 @@ package canvas
 import (
 	"bytes"
 	"fmt"
-	"io"
 
 	"github.com/ashvarts/raytracer/color"
 )
@@ -44,15 +43,11 @@ func (c Canvas) PixelAt(x, y int) color.Color {
 	return c.Pixels[cordonates]
 }
 
-func (c Canvas) WritePPMHeader(w io.Writer) error {
-	_, err := fmt.Fprintf(w, "P3\n%d %d\n255", c.Width, c.Height)
-	if err != nil {
-		return err
-	}
-	return nil
+func (c Canvas) writePPMHeader(buf *bytes.Buffer) {
+	buf.WriteString(fmt.Sprintf("P3\n%d %d\n255", c.Width, c.Height))
 }
 
-func (c Canvas) WritePPMBody(buf *bytes.Buffer) error {
+func (c Canvas) writePPMBody(buf *bytes.Buffer) error {
 	for row := 0; row < c.Height; row++ {
 		if row > 0 {
 			buf.WriteString("\n")
@@ -70,10 +65,18 @@ func (c Canvas) WritePPMBody(buf *bytes.Buffer) error {
 	return nil
 }
 
-func (c Canvas) WritePPMFooter(w io.Writer) error {
+func (c Canvas) writePPMFooter(buf *bytes.Buffer) error {
 	_, err := fmt.Print("\n")
 	if err != nil {
 		return err
 	}
 	return nil
+}
+
+func (c Canvas) String() string {
+	buf := &bytes.Buffer{}
+	c.writePPMHeader(buf)
+	c.writePPMBody(buf)
+	c.writePPMFooter(buf)
+	return buf.String()
 }
