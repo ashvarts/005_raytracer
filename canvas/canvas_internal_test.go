@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/ashvarts/raytracer/color"
+	"github.com/ashvarts/raytracer/artcolor"
 )
 
 func TestCanvasToPPM(t *testing.T) {
@@ -52,9 +52,9 @@ func TestCanvasBodyToPPM(t *testing.T) {
 	t.Run("5,3 with pixels", func(t *testing.T) {
 		buf := bytes.Buffer{}
 		c := NewCanvas(5, 3)
-		c.WritePixel(0, 0, color.NewColor(1.5, 0, 0))
-		c.WritePixel(2, 1, color.NewColor(0, 0.5, 0))
-		c.WritePixel(4, 2, color.NewColor(-0.5, 0, 1))
+		c.WritePixel(0, 0, artcolor.NewColor(1.5, 0, 0))
+		c.WritePixel(2, 1, artcolor.NewColor(0, 0.5, 0))
+		c.WritePixel(4, 2, artcolor.NewColor(-0.5, 0, 1))
 		err := c.writePPMBody(&buf)
 		if err != nil {
 			t.Fatal(err)
@@ -74,7 +74,7 @@ func TestCanvasBodyToPPM(t *testing.T) {
 
 		// set every pixel to almost white
 		for pixel := range c.Pixels {
-			c.WritePixel(pixel.X, pixel.Y, color.NewColor(1, 0.8, 0.6))
+			c.WritePixel(pixel.X, pixel.Y, artcolor.NewColor(1, 0.8, 0.6))
 		}
 		err := c.writePPMBody(&buf)
 		if err != nil {

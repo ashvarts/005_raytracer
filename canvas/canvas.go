@@ -4,14 +4,14 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/ashvarts/raytracer/color"
+	"github.com/ashvarts/raytracer/artcolor"
 )
 
 type Coordinates struct {
 	X, Y int
 }
 
-type Pixel map[Coordinates]color.Color
+type Pixel map[Coordinates]artcolor.Color
 
 type Canvas struct {
 	Width, Height int
@@ -27,24 +27,24 @@ func NewCanvas(w, h int) Canvas {
 
 	for x := 0; x < w; x++ {
 		for y := 0; y < h; y++ {
-			canvas.Pixels[Coordinates{x, y}] = color.NewColor(0, 0, 0)
+			canvas.Pixels[Coordinates{x, y}] = artcolor.NewColor(0, 0, 0)
 		}
 	}
 	return canvas
 }
 
-func (c Canvas) WritePixel(x int, y int, col color.Color) {
+func (c Canvas) WritePixel(x int, y int, col artcolor.Color) {
 	cordonates := Coordinates{x, y}
 	c.Pixels[cordonates] = col
 }
 
-func (c Canvas) PixelAt(x, y int) color.Color {
+func (c Canvas) PixelAt(x, y int) artcolor.Color {
 	cordonates := Coordinates{x, y}
 	return c.Pixels[cordonates]
 }
 
 func (c Canvas) writePPMHeader(buf *bytes.Buffer) {
-	buf.WriteString(fmt.Sprintf("P3\n%d %d\n255", c.Width, c.Height))
+	buf.WriteString(fmt.Sprintf("P3\n%d %d\n255\n", c.Width, c.Height))
 }
 
 func (c Canvas) writePPMBody(buf *bytes.Buffer) error {

@@ -3,8 +3,8 @@ package canvas_test
 import (
 	"testing"
 
+	"github.com/ashvarts/raytracer/artcolor"
 	"github.com/ashvarts/raytracer/canvas"
-	"github.com/ashvarts/raytracer/color"
 )
 
 func TestNewCanvas(t *testing.T) {
@@ -18,7 +18,7 @@ func TestNewCanvas(t *testing.T) {
 	}
 
 	for _, col := range c.Pixels {
-		if col != color.NewColor(0, 0, 0) {
+		if col != artcolor.NewColor(0, 0, 0) {
 			t.Errorf("pixel should be color(0,0,0)")
 		}
 	}
@@ -26,7 +26,7 @@ func TestNewCanvas(t *testing.T) {
 
 func TestWritingPixelToCanvas(t *testing.T) {
 	c := canvas.NewCanvas(10, 20)
-	red := color.NewColor(1, 0, 0)
+	red := artcolor.NewColor(1, 0, 0)
 
 	c.WritePixel(2, 3, red)
 	gott := c.PixelAt(2, 3)

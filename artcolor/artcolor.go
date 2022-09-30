@@ -1,4 +1,4 @@
-package color
+package artcolor
 
 import (
 	"fmt"
