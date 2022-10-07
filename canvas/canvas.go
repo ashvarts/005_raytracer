@@ -65,12 +65,8 @@ func (c Canvas) writePPMBody(buf *bytes.Buffer) error {
 	return nil
 }
 
-func (c Canvas) writePPMFooter(buf *bytes.Buffer) error {
-	_, err := fmt.Print("\n")
-	if err != nil {
-		return err
-	}
-	return nil
+func (c Canvas) writePPMFooter(buf *bytes.Buffer) {
+	buf.WriteString("\n")
 }
 
 func (c Canvas) String() string {
