@@ -47,22 +47,21 @@ func (c Canvas) writePPMHeader(buf *bytes.Buffer) {
 	buf.WriteString(fmt.Sprintf("P3\n%d %d\n255\n", c.Width, c.Height))
 }
 
-func (c Canvas) writePPMBody(buf *bytes.Buffer) error {
+func (c Canvas) writePPMBody(buf *bytes.Buffer) {
 	for row := 0; row < c.Height; row++ {
-		if row > 0 {
-			buf.WriteString("\n")
-		}
 		for col := 0; col < c.Width; col++ {
-			if col != 0 && col%5 == 0 {
-				buf.WriteString("\n")
-			}
 			buf.WriteString(c.PixelAt(col, row).String())
-			if col != c.Width-1 {
+			// if last pixel, exit
+			if row == c.Height-1 && col == c.Width-1 {
+				break
+				// if not first, but a multiple of 4, or last in col then start new line
+			} else if col != 0 && col%4 == 0 || col == c.Width-1 {
+				buf.WriteString("\n")
+			} else {
 				buf.WriteString(" ")
 			}
 		}
 	}
-	return nil
 }
 
 func (c Canvas) writePPMFooter(buf *bytes.Buffer) {

@@ -38,26 +38,26 @@ func tick(env environment, proj projectile) projectile {
 var white = artcolor.NewColor(0.8, 0.8, 0.8)
 
 func main() {
-	c := canvas.NewCanvas(20, 20)
-	// for i := 0; i < 500; i++ {
-	// 	p = tick(e, p)
-	// 	// co := coordinates(p)
-	// 	// c.WritePixel(co.X, c.Height-co.Y, white)
-	// 	c.WritePixel(c.Height-i, i, white)
-	// 	if p.position.Y < 0.0 {
-	// 		break
-	// 	}
-
-	// }
-
-	for y := 0; y < c.Height; y++ {
-		if y%2 == 0 {
-			for x := 0; x < c.Width; x++ {
-				c.WritePixel(y, x, white)
-			}
+	c := canvas.NewCanvas(100, 100)
+	for i := 0; i < 10000; i++ {
+		p = tick(e, p)
+		// co := coordinates(p)
+		// c.WritePixel(co.X, c.Height-co.Y, white)
+		c.WritePixel(i, i, white)
+		if p.position.Y < 0.0 {
+			break
 		}
 
 	}
+
+	// for y := 0; y < c.Height; y++ {
+	// 	if y%2 == 0 {
+	// 		for x := 0; x < c.Width; x++ {
+	// 			c.WritePixel(y, x, white)
+	// 		}
+	// 	}
+
+	// }
 
 	f, err := os.Create("test.ppm")
 	check(err)
