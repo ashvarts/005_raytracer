@@ -4,8 +4,8 @@ type Dim struct {
 	R, C int
 }
 
-type Matrix map[Dim]float64
+type Matrix [][]float64
 
-func NewMatrix() Matrix {
-	return make(Matrix)
+func NewMatrix(r, c int) Matrix {
+	return make(Matrix, r*c)
 }

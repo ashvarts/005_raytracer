@@ -1,24 +1,14 @@
 package matrix
 
 import (
-	"reflect"
+	"fmt"
 	"testing"
 )
 
 func TestNewMatrix(t *testing.T) {
-	tests := []struct {
-		name string
-		want Matrix
-	}{{
-		name: "Create New",
-		want: make(Matrix),
-	},
+	m := Matrix{
+		[]float64{24, 23},
+		[]float64{4, 5},
 	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := NewMatrix(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewMatrix() = %v, want %v", got, tt.want)
-			}
-		})
-	}
+	fmt.Println(m)
 }
