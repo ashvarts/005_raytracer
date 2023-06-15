@@ -22,3 +22,20 @@ func TestNewMatrix(t *testing.T) {
 	assert.Equal(m[3][0], 13.5)
 	assert.Equal(m[3][2], 15.5)
 }
+
+func TestMatrixEquality(t *testing.T) {
+	a := Matrix{
+		[]float64{1, 2, 3, 4},
+		[]float64{5, 6, 7, 8},
+		[]float64{9, 8, 7, 6},
+		[]float64{5, 4, 3, 2},
+	}
+	b := Matrix{
+		[]float64{1, 2, 3, 4},
+		[]float64{5, 6, 7, 8},
+		[]float64{9, 8, 7, 6},
+		[]float64{5, 4, 3, 2},
+	}
+	got := Equal(a, b)
+	assert.Equal(t, true, got)
+}
